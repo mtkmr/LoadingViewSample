@@ -1,0 +1,30 @@
+## Obj-C/Swift specific
+*.hmap
+
+.build/
+
+com.mono0926.LicensePlist/
+com.mono0926.LicensePlist.latest_result.txt
+com.mono0926.LicensePlist.plist
+
+# CocoaPods
+Pods/
+*.xcworkspace
+!default.xcworkspace
+*.xcuserstate
+xcuserdata
+UserInterfaceState.xcuserstate
+
+# Firebase
+.firebase/
+
+# SwiftGen
+Generated/
+
+# others
+*.swp
+!.gitkeep
+.DS_Store
+#.plist
+# Carthage
+Carthage/Build/
