@@ -11,76 +11,48 @@ final class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // view
         view.backgroundColor = .white
 
-        // start button
-        let startButton = UIButton()
-        startButton.backgroundColor = .red
-        startButton.setTitle("START", for: .normal)
-        startButton.setTitleColor(.white, for: .normal)
-        startButton.layer.cornerRadius = 10
-        startButton.addTarget(self, action: #selector(tappedStartButton(_:)), for: .touchUpInside)
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(startButton)
+        let vStackView = UIStackView()
+        vStackView.axis = .vertical
+        vStackView.distribution = .fillEqually
+        vStackView.spacing = 16
+        vStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(vStackView)
 
-        // stop button
-        let stopButton = UIButton()
-        stopButton.backgroundColor = .blue
-        stopButton.setTitle("STOP", for: .normal)
-        stopButton.setTitleColor(.white, for: .normal)
-        stopButton.layer.cornerRadius = 10
-        stopButton.addTarget(self, action: #selector(tappedStopButton(_:)), for: .touchUpInside)
-        stopButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stopButton)
+        let loading1Button = UIButton()
+        loading1Button.setTitle("Loading1", for: .normal)
+        loading1Button.setTitleColor(.red, for: .normal)
+        loading1Button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+        loading1Button.addTarget(self, action: #selector(tappedLoading1Button(_:)), for: .touchUpInside)
+        loading1Button.translatesAutoresizingMaskIntoConstraints = false
+        vStackView.addArrangedSubview(loading1Button)
 
-        // next button
-        let nextButton = UIButton()
-        nextButton.backgroundColor = .green
-        nextButton.setTitle("STOP", for: .normal)
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.layer.cornerRadius = 10
-        nextButton.addTarget(self, action: #selector(tappedNextButton(_:)), for: .touchUpInside)
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nextButton)
+        let loading2Button = UIButton()
+        loading2Button.setTitle("Loading2", for: .normal)
+        loading2Button.setTitleColor(.blue, for: .normal)
+        loading2Button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+        loading2Button.addTarget(self, action: #selector(tappedLoading2Button(_:)), for: .touchUpInside)
+        loading2Button.translatesAutoresizingMaskIntoConstraints = false
+        vStackView.addArrangedSubview(loading2Button)
 
-        // Auto Layout
         NSLayoutConstraint.activate([
-
-            startButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
-            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.widthAnchor.constraint(equalToConstant: 200),
-            startButton.heightAnchor.constraint(equalToConstant: 44),
-
-            stopButton.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 44),
-            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopButton.widthAnchor.constraint(equalToConstant: 200),
-            stopButton.heightAnchor.constraint(equalToConstant: 44),
-
-            nextButton.topAnchor.constraint(equalTo: stopButton.bottomAnchor, constant: 44),
-            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nextButton.widthAnchor.constraint(equalToConstant: 200),
-            nextButton.heightAnchor.constraint(equalToConstant: 44),
-
+            vStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            vStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            vStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 
-    @objc private func tappedStartButton(_ sender: UIButton) {
-        showLoadingView()
+
+    @objc private func tappedLoading1Button(_ sender: UIButton) {
+        let loading1VC = Loading1ViewController()
+        navigationController?.pushViewController(loading1VC, animated: true)
     }
 
-    @objc private func tappedStopButton(_ sender: UIButton) {
-        hideLoadingView()
+    @objc private func tappedLoading2Button(_ sender: UIButton) {
+        let loading2VC = Loading2ViewController()
+        navigationController?.pushViewController(loading2VC, animated: true)
     }
-
-    @objc private func tappedNextButton(_ sender: UIButton) {
-        let nextVC = NextTableViewController()
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-
 }
-
-//MARK: - Loadable
-// 準拠させるだけでインジケータを表示/非表示できる
-extension MainViewController: Loadable {}
 
